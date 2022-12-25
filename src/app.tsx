@@ -5,13 +5,13 @@ import { NameEditComponent } from "./nameEdit";
 export const App = () => {
     const [name, setName] = React.useState('defaultUserName');
 
-    const setUsernameState = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setName(event.target.value);
+    const setUsernameState = (newName: string) => {
+        setName(newName);
     }
     return (
         <>
             <HelloComponent userName={name} />
-            <NameEditComponent userName={name} onChange={setUsernameState} />
+            <NameEditComponent initialUserName={name} onNameUpdated={setUsernameState} />
         </>
     )
 }

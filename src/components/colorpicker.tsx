@@ -1,6 +1,20 @@
 import * as React from "react";
 import { Color } from "../model/color";
 
+interface PropsColorSlider {
+    value: number;
+    onValueUpdated: (newValue: number) => void;
+}
+
+const ColorSliderComponent = (props: PropsColorSlider) => {
+    return (
+        <div>
+            <input type="range" min="0" max="255" value={props.value} onChange={event => props.onValueUpdated(+event.target.value)} />
+            {props.value}
+        </div>
+
+    );
+};
 
 interface Props {
     color: Color,
@@ -9,12 +23,10 @@ interface Props {
 
 export const ColorPicker = (props: Props) => {
     return <div>
-        <input type="range" min="0" max="255" value={props.color.red} onChange={event => props.onColorUpdated({ red: +event.target.value, green: props.color.green, blue: props.color.blue })} />
-        {props.color.red}
+        <ColorSliderComponent value={props.color.red} onValueUpdated={(value) => props.onColorUpdated({ red: value, green: props.color.green, blue: props.color.blue })} />
         <br />
-        <input type="range" min="0" max="255" value={props.color.green} onChange={event => props.onColorUpdated({ red: props.color.red, green: +event.target.value, blue: props.color.blue })} />
-        {props.color.green}
+        <ColorSliderComponent value={props.color.green} onValueUpdated={(value) => props.onColorUpdated({ red: props.color.red, green: value, blue: props.color.blue })} />
         <br />
-        <input type="range" min="0" max="255" value={props.color.blue} onChange={event => props.onColorUpdated({ red: props.color.red, green: props.color.green, blue: +event.target.value })} />
+        <ColorSliderComponent value={props.color.blue} onValueUpdated={(value) => props.onColorUpdated({ red: props.color.red, green: props.color.green, blue: value })} />
     </div>
 };

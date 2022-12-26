@@ -4,14 +4,26 @@ import { NameEditComponent } from "./nameEdit";
 
 export const App = () => {
     const [name, setName] = React.useState('defaultUserName');
+    const [editingName, setEditingName] = React.useState("defaultUserName");
 
-    const setUsernameState = (newName: string) => {
-        setName(newName);
+    const loadUsername = () => {
+        setTimeout(() => {
+            setName("name from async call");
+            setEditingName("name from async call");
+        }, 500);
+    };
+
+    React.useEffect(() => {
+        loadUsername();
+    }, []);
+
+    const setUsernameState = () => {
+        setName(editingName);
     }
     return (
         <>
             <HelloComponent userName={name} />
-            <NameEditComponent initialUserName={name} onNameUpdated={setUsernameState} />
+            <NameEditComponent initialUserName={name} onNameUpdated={setUsernameState} editingName={editingName} onEditingNameUpdated={setEditingName} />
         </>
     )
 }

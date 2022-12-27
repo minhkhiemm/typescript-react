@@ -1,5 +1,5 @@
 import * as React from "react";
-import { HelloComponent, NameEditComponent, ColorBrowser, ColorPicker, SidebarComponent } from "./components";
+import { HelloComponent, NameEditComponent, ColorBrowser, ColorPicker, SidebarComponent, MemberTableComponent } from "./components";
 import { Color } from "./model/color";
 
 export const App = () => {
@@ -32,6 +32,7 @@ export const App = () => {
                     <li><a href="https://www.imdb.com/title/tt0062622/">2001: a space odyssey</a></li>
                 </ul>
             </SidebarComponent>
+            <MemberTableComponent />
             <ColorBrowser color={color} />
             <ColorPicker color={color} onColorUpdated={setColor} />
             <HelloComponent userName={name} />

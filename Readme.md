@@ -57,9 +57,20 @@ npm install react react-dom --save
 ```
 npm install @types/react @types/react-dom --save-dev
 ```
-#### install types
+#### Install types
 ```
 npm install @types/node --save-dev
+```
+
+#### Install Axios
+```
+npm install axios --save 
+```
+
+#### Install babel runtime
+```
+npm install -D @babel/plugin-transform-runtime
+npm install -P @babel/runtime
 ```
 #### Start Webpack dev server
 ```

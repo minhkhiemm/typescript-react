@@ -22,9 +22,37 @@ export const MemberTableComponent = () => {
 
     return (
         <>
-            {memberCollection.map(member => (
-                <h1 key={member.id}>{member.login}</h1>
-            ))}
+            <table>
+                <thead>
+                    <tr>
+                        <th>
+                            Avatar
+                        </th>
+                        <th>
+                            Id
+                        </th>
+                        <th>Name</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {memberCollection.map(member => (
+                        <MemberRow key={member.id} member={member} />
+                    ))}
+                </tbody>
+            </table>
         </>
     )
 }
+
+const MemberRow = ({ member }: { member: MemberEntity }) =>
+    <tr >
+        <td>
+            <img src={member.avatar_url} style={{ maxWidth: '10rem' }} />
+        </td>
+        <td>
+            <span>{member.id}</span>
+        </td>
+        <td>
+            <span>{member.login}</span>
+        </td>
+    </tr >

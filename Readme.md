@@ -57,6 +57,10 @@ npm install react react-dom --save
 ```
 npm install @types/react @types/react-dom --save-dev
 ```
+#### install types
+```
+npm install @types/node --save-dev
+```
 #### Start Webpack dev server
 ```
 npm start

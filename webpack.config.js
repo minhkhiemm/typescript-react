@@ -2,12 +2,13 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const webpack = require("webpack");
 const path = require("path");
+
 const basePath = __dirname;
 
 module.exports = {
     context: path.join(basePath, "src"),
     resolve: {
-        extensions: [".js", ".ts", ".tsx"],
+        extensions: [".js", ".ts", ".tsx", ".css"],
     },
     entry: ["@babel/polyfill", "./index.tsx"],
     output: {
@@ -17,7 +18,7 @@ module.exports = {
     devtool: "source-map",
     devServer: {
         host: "localhost",
-        port: 3000
+        port: 8080,
     },
     module: {
         rules: [
@@ -27,12 +28,29 @@ module.exports = {
                 loader: "awesome-typescript-loader",
                 options: {
                     useBabel: true,
-                    babelCore: "@babel/core",
-                }
+                    babelCore: "@babel/core", // needed for Babel v7
+                },
             },
             {
                 test: /\.css$/,
+                include: /node_modules/,
                 use: [MiniCssExtractPlugin.loader, "css-loader"],
+            },
+            {
+                test: /\.css$/,
+                exclude: /node_modules/,
+                use: [
+                    MiniCssExtractPlugin.loader,
+                    {
+                        loader: "css-loader",
+                        options: {
+                            modules: {
+                                localIdentName: "[name]__[local]___[hash:base64:5]",
+                            },
+                            localsConvention: "camelCase",
+                        },
+                    },
+                ],
             },
             {
                 test: /\.(png|jpg|gif|svg)$/,
@@ -42,7 +60,7 @@ module.exports = {
                     esModule: false,
                 },
             },
-        ]
+        ],
     },
     plugins: [
         //Generate index.html in /dist => https://github.com/ampedandwired/html-webpack-plugin
@@ -56,4 +74,4 @@ module.exports = {
             chunkFilename: "[id].css",
         }),
     ],
-}
+};

@@ -1,5 +1,5 @@
 import * as React from "react";
-import { HelloComponent, NameEditComponent, ColorBrowser, ColorPicker } from "./components";
+import { HelloComponent, NameEditComponent, ColorBrowser, ColorPicker, SidebarComponent } from "./components";
 import { Color } from "./model/color";
 
 export const App = () => {
@@ -23,6 +23,7 @@ export const App = () => {
     }
     return (
         <>
+            <SidebarComponent isVisible={true} />
             <ColorBrowser color={color} />
             <ColorPicker color={color} onColorUpdated={setColor} />
             <HelloComponent userName={name} />
